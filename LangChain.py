@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from langchain.document_loaders import UnstructuredURLLoader
 import list
 import uuid

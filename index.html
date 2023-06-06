@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="postData()">POSTリクエストを送信</button>
+  <script>
+    function postData() {
+      console.log('POSTリクエストを送信します'); // 送信直前のメッセージを表示
+      const data = { message: "node.jsについて教えて" };
+      fetch('http://localhost:3000/api/v1/docs/summary', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json(); // JSONデータのみを受け取る
+          } else {
+            return response.json().then(errorData => {
+              const err_code = errorData.error.code;
+              const err_message = errorData.error.message;
+              //console.error('エラー:', err_code);
+              console.error(errorData)
+              throw new Error(`${err_code}\nerror_message:${err_message}`); // エラーを投げる
+            });
+          }
+        })
+        .then(jsonData => {
+          console.log('POSTリクエストが成功しました');
+          console.log(jsonData); // 受け取ったJSONデータを表示する
+        })
+        .catch(error => {
+          console.error('エラー:', error);
+          if (error.response) {
+            error.response.json().then(jsonData => {
+              console.log('POSTリクエストが失敗しました');
+              console.log(jsonData); // エラーレスポンスのJSONデータを表示する
+            });
+          }
+        });
+    }
+  </script>
+</body>
+
+</html>

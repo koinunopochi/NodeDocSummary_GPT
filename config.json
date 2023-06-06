@@ -1,0 +1,19 @@
+{
+  "port": 3000,
+  "e_obj": [
+    {
+      "index": 0,
+      "status": 400,
+      "throw_msg": "400_RequiredParamError",
+      "code": "0001",
+      "e_msg": "要素の値に不備があります。"
+    },
+    {
+      "index": 1,
+      "status": 400,
+      "throw_msg": "400_UndefinedParamError",
+      "code": "0002",
+      "e_msg": "必須パラメータが設定されていません。"
+    }
+  ]
+}
